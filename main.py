@@ -1,2 +1,1 @@
-stri = 'string'
-print(stri[:-1])
+print(type('va sya 112 dsf'.split()))
