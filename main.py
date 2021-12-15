@@ -1,1 +1,12 @@
-print(type('va sya 112 dsf'.split()))
+
+
+inpt = input()
+lst = []
+while inpt != 'stop':
+    lst.append(inpt)
+    inpt = input()
+result = ''
+for i in lst:
+    result += i + ' '
+print(result)
+
