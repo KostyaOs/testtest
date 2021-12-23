@@ -1,5 +1,5 @@
 
-
+import bas
 inpt = input()
 lst = []
 while inpt != 'stop':
