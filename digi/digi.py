@@ -17,45 +17,57 @@ while command != 'выход':
     command = input('\n* ГЛАВНОЕ МЕНЮ *\nопции:\nминимум\nповторения\nвыход\n')    
     if command == 'минимум':
         # code for minimum page    
+        expected = ['перезагрузить','выполнил', 'главное меню','выход']
+        command = 'перезагрузить' # so that program shows activities first 
+        while command != 'главное меню':
+            if command in expected: # if command makes sense
+                if command == 'перезагрузить':
+                    os.system('cls') # clear console 
 
-        reloads = ['минимум', '']
-        breaks = ['выход', 'главное меню']
-        while command not in breaks:
-
-            if command not in reloads:
-                comment = 'для такого ввода нет опции, попробуй еще раз\n'
-                command = input(comment)
-            else:
-                # update sorting
-                todo.sort_values(['привязка ко времени дня','напряжение глаз', 'длительность'],ascending=[True, True, False], inplace=True)
-
-                print('\n***К ВЫПОЛНЕНИЮ***')
-                print(todo) ##
-
-                print('\n***УЖЕ СДЕЛАНО***')
-                print(done) ##
+                    # resort
+                    # show todo
+                    # show done
                     
-                command = input('\nопции:\n[Enter] (обновить списки)\n<индекс> (отметить выполненное действие)\nглавное меню\nвыход\n')
-                
-                # если ввел индекс
-                ids = list(todo.index.values)
-                while command.isdigit() and (int(command) in ids):
-                    id = int(command)
-                    print('отметил выполнение минимума -', todo.loc[id]['название'])
-                    done = done.append(todo.loc[id], ignore_index=True)
-                    todo.drop(id, inplace=True)
-                    command = input()
+                    todo.sort_values(['привязка ко времени дня','напряжение глаз', 'длительность'],ascending=[True, True, False], inplace=True)
+
+                    print('\n***К ВЫПОЛНЕНИЮ***')
+                    print(todo) ##
+
+                    print('\n***УЖЕ СДЕЛАНО***')
+                    print(done) ##
                     
+                    comment = '\nопции:\nперезагрузить\nвыполнил\nглавное меню\nвыход\n'
+                if command == 'выполнил':
+                    # ask to type indexes of completed activities and check check that all indexes make sense
+                    comment = 'введи индексы выполненных задач\n'
+                    nonsense = True # True if input is nonsense
+                    while nonsense:	# while input makes no sense			
+                        try:
+                            indexes = list(map(int, input(comment).split(' '))) # check that all inputs are integers
+                            nonsense = False
+
+                            # check that all numbers are present in todo indexes list
+                            possible_ids = list(todo.index.values)
+                            for id in indexes:
+                                if id not in possible_ids: ##
+                                    nonsense = True
+                            
+                        except ValueError: ## find out what type of error it actualy is
+                            nonsense = True
+                                     
+                    # for each index in indexes
+                        # move it from todo to done                                     
+                    for id in indexes:
+                        done = done.append(todo.loc[id], ignore_index=True)
+                        todo.drop(id, inplace=True)
+                        command = input()
                     
-        # show todo and done
-        # while command is not in break commands list 
-            # tell what commands are available
-            # ask for command
-            # if command makes sense
-                # execute
-            # else:
-                # say it is nonsense
-                #return to #ask for command
+                    comment = 'могу принять новую команду\n'
+            else:	# if command is nonsense
+                comment = 'для такого ввода нет команды, давай еще раз\n'
+            command = input(comment)
+            if command == 'выход':
+                exit()
     elif command == 'повторения':
     
         # code for revisions page
