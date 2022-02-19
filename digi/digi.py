@@ -8,7 +8,16 @@ description = pd.read_csv(
 	sep='\t',
 	)
 
+todo_path = 'D:/storage/pycharmProjects/project1/digi/todo.tsv'
 todo = description.copy() ##first column of desription table
+
+# save todo table as file
+todo.to_csv(
+    todo_path, 
+    sep='\t', 
+    index = False # says do NOT write index column to table file
+    )
+
 done = pd.DataFrame(columns = todo.columns)## will be filled with elements from todo
 
 command = ''
@@ -65,6 +74,15 @@ while command != 'выход':
                     comment = 'могу принять новую команду\n'
             else:	# if command is nonsense
                 comment = 'для такого ввода нет команды, давай еще раз\n'
+            
+            # save todo table as file
+            todo.to_csv(
+                todo_path, 
+                sep='\t', 
+                index = False # says do NOT write index column to table file
+                )
+
+            
             command = input(comment)
             if command == 'выход':
                 exit()
