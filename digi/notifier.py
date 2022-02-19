@@ -1,5 +1,5 @@
 import datetime
-from win10toast import ToastNotifier
+#from win10toast import ToastNotifier
 from apscheduler.schedulers.blocking import BlockingScheduler
 import pandas as pd
 import os
@@ -81,7 +81,7 @@ awakened()
 
 # make job running all day
 scheduler = BlockingScheduler()
-hours_between = 5
+hours_between = 30
 scheduler.add_job(awakened, 'interval', seconds=hours_between)
 scheduler.start()
 
