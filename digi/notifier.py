@@ -81,8 +81,8 @@ awakened()
 
 # make job running all day
 scheduler = BlockingScheduler()
-hours_between = 30
-scheduler.add_job(awakened, 'interval', seconds=hours_between)
+hours_between = 1
+scheduler.add_job(awakened, 'interval', hours=hours_between)
 scheduler.start()
 
 
