@@ -15,7 +15,7 @@ def awakened():
     )
 
     # define column name here because it is so long
-    column_name = 'привязка ко времени дня'
+    column_name = 'for evening'
 
     #check what time is it now
     now = datetime.datetime.now()
@@ -30,10 +30,10 @@ def awakened():
             selected_rows = minimum_todo[minimum_todo[column_name] == False]
 
             #turn name column to list
-            names = selected_rows['название'].tolist()
+            names = selected_rows['name'].tolist()
 
             # write text of notification
-            text = 'До вечера нужно выполнить следующие задачи:\n\n'
+            text = 'Following tasks are to be done before evening:\n\n'
             for name in names:
                 text += name + '\n'
 
@@ -47,16 +47,16 @@ def awakened():
             selected_rows = minimum_todo[minimum_todo[column_name] == True]
 
             #turn name column to list
-            names = selected_rows['название'].tolist()
+            names = selected_rows['name'].tolist()
 
             # write title and text of notification
-            text = 'До сна нужно выполнить следующие задачи:\n\n'
+            text = 'Following tasks are to be done before sleep:\n\n'
             for name in names:
                 text += name + '\n'
 
 
     # write title and text of notification
-    text += '\nКак насчет сходить сделать тройку-другую подтягиваний?'
+    text += '\nHow about 3 pullups?'
 
     # send notification
     open(notification_filepath, 'w', encoding='utf-8').write(text)

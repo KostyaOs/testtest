@@ -56,7 +56,7 @@ else:
 command = ''
 while command != 'exit':
     os.system('cls') # clear console 
-    command = input('\n* MAIN MENU *\noptions:\nminimum\nuni check\nexit\n')    
+    command = input('\n* MAIN MENU *\noptions:\nminimum\nexit\n')    
     if command == 'minimum':
         # code for minimum page    
         expected = ['reload','completed', 'main menu','exit', 'sungadoro']
@@ -182,76 +182,15 @@ while command != 'exit':
                     print('Here are most fit tasks:')
                     print(selected_rows)
                 
-                    comment = 'ready to get next command\n'
-
-                if command == 'exit':
-                    exit()
             else:	# if command is nonsense
                 comment = 'Wrong format. Try again\n'
 
             command = input(comment)
+            if command == 'exit':
+                exit()
 
-    elif command == 'uni check':
-        
-        expected = ['main menu','exit', 'reload']
-        command = 'reload'
-        while command != 'main menu':
-            if command in expected: # if command makes sense
-                if command == 'reload':
-                    os.system('cls') # clear console 
 
-                    # get inputs
-                    # form plan
-                    
-                    water = input('Do you need to take water? (yes / no)\n')
-                    food = input('Do you need to take food? (yes / no)\n')
-                    money = input('Do you need a lot of money? (Bus, food expenses) (yes / no)\n')
-                    
-                    plan = 'Here is plan for item fetching:\n\n'
-                    
-                    plan += 'Go wash your hands. After that, in following order, take things that need clean hands\n'
-                    if water == 'yes' or food == 'yes':
-                        plan += '(kitchen)\n'
-                    if water =='yes':
-                        plan += 'water\n'
-                    if food=='yes':
-                        plan += 'food\n'
-                    plan += '(dresser)\n'
-                    plan += 'mask\n\n'
 
-                    plan += 'For following items there is no need for clean hands. Follow order to reduce time for fetching\n'
-               
-                    plan += '(dresser)\n'
-                    plan += 'socks\n'
-                    plan += 'spare cloth\n'
-
-                    plan += '(desk)\n'
-                    plan += 'earbuds\n'
-                    plan += 'paper and pen\n'
-                    plan += 'phone\n'
-                    
-                    plan += '(backpack)\n'
-                    plan += 'documents\n'
-                    plan += 'sleepers\n'
-                    
-                    plan += '(entrance)\n'    
-                    if money =='yes':
-                        plan += 'A LOT OF '
-                    plan += 'money\n'
-                    plan += 'keys\n'
-
-                    print(plan)
-
-                    comment = '\noptions:\nreload\nmain menu\nexit\n'
-                    
-                if command == 'exit':
-                    exit()
-            else:	# if command is nonsense
-                comment = 'Wrong format. Try again\n'
-
-            command = input(comment)
-
-           
 
 
 # eye-easy first

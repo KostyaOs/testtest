@@ -54,34 +54,34 @@ else:
 
 
 command = ''
-while command != 'exit':
+while command != 'выход':
     os.system('cls') # clear console 
-    command = input('\n* MAIN MENU *\noptions:\nminimum\nuni check\nexit\n')    
-    if command == 'minimum':
+    command = input('\n* ГЛАВНОЕ МЕНЮ *\nопции:\nминимум\nповторения\nвыход\n')    
+    if command == 'минимум':
         # code for minimum page    
-        expected = ['reload','completed', 'main menu','exit', 'sungadoro']
-        command = 'reload' # so that program shows activities first 
-        while command != 'main menu':
+        expected = ['перезагрузить','выполнил', 'главное меню','выход', 'сунгадоро']
+        command = 'перезагрузить' # so that program shows activities first 
+        while command != 'главное меню':
             if command in expected: # if command makes sense
-                if command == 'reload':
+                if command == 'перезагрузить':
                     os.system('cls') # clear console 
 
                     # resort
                     # show todo
                     # show done
                     
-                    todo.sort_values(['for evening','eye strain', 'duration'],ascending=[True, True, False], inplace=True)
+                    todo.sort_values(['привязка ко времени дня','напряжение глаз', 'длительность'],ascending=[True, True, False], inplace=True)
 
-                    print('\n* TODO *')
+                    print('\n***К ВЫПОЛНЕНИЮ***')
                     print(todo) ##
 
-                    print('\n* DONE *')
+                    print('\n***УЖЕ СДЕЛАНО***')
                     print(done) ##
                     
-                    comment = '\noptions:\nreload\ncompleted\nsungadoro\nmain menu\nexit\n'
-                if command == 'completed':
+                    comment = '\nопции:\nперезагрузить\nвыполнил\nсунгадоро\nглавное меню\nвыход\n'
+                if command == 'выполнил':
                     # ask to type indexes of completed activities and check check that all indexes make sense
-                    comment = 'type indexes of completed tasks\n'
+                    comment = 'введи индексы выполненных задач\n'
                     nonsense = True # True if input is nonsense
                     while nonsense:	# while input makes no sense			
                         try:
@@ -119,9 +119,9 @@ while command != 'exit':
                     # write current day to logs (when tables get updated)
                     open(today_path, 'w', encoding='utf-8').write(today)
 
-                    comment = 'ready to get next command\n'
+                    comment = 'могу принять новую команду\n'
                                         
-                if command == 'sungadoro':
+                if command == 'сунгадоро':
                     
                     # ask for  eyestrain effect 
                     # ask for  work duration 
@@ -160,16 +160,16 @@ while command != 'exit':
                     while len(possible_rows.index) != 0:
                         selected_rows = possible_rows.copy()
                         if filter == 1:
-                            possible_rows = possible_rows[possible_rows['eye strain'] == strain]
+                            possible_rows = possible_rows[possible_rows['напряжение глаз'] == strain]
                             print(possible_rows)
                         elif filter == 2:
                             print('got to 2')
-                            #possible_rows = possible_rows[possible_rows['duration'] >= min_break]##
-                            possible_rows = possible_rows[possible_rows['duration'] <= max_break]
+                            #possible_rows = possible_rows[possible_rows['длительность'] >= min_break]##
+                            possible_rows = possible_rows[possible_rows['длительность'] <= max_break]
                             print(possible_rows)
                         elif filter == 3:
                             print('got to 3')
-                            possible_rows = possible_rows[possible_rows['for evening'] == time_dependent]
+                            possible_rows = possible_rows[possible_rows['привязка ко времени дня'] == time_dependent]
                             print(possible_rows)
 
                         elif filter == 4:
@@ -177,81 +177,24 @@ while command != 'exit':
                             print(possible_rows)
                             break
                         filter += 1
-                    selected_rows.sort_values(['duration'],ascending=False,inplace=True)
+                    selected_rows.sort_values(['длительность'],ascending=False,inplace=True)
                     selected_rows = selected_rows.reset_index(drop=True)
                     print('Here are most fit tasks:')
                     print(selected_rows)
                 
-                    comment = 'ready to get next command\n'
-
-                if command == 'exit':
-                    exit()
             else:	# if command is nonsense
-                comment = 'Wrong format. Try again\n'
+                comment = 'для такого ввода нет команды, давай еще раз\n'
 
             command = input(comment)
-
-    elif command == 'uni check':
+            if command == 'выход':
+                exit()
+    elif command == 'повторения':
+    
+        # code for revisions page
         
-        expected = ['main menu','exit', 'reload']
-        command = 'reload'
-        while command != 'main menu':
-            if command in expected: # if command makes sense
-                if command == 'reload':
-                    os.system('cls') # clear console 
+        print('\nраздел еще не написал этот')
 
-                    # get inputs
-                    # form plan
-                    
-                    water = input('Do you need to take water? (yes / no)\n')
-                    food = input('Do you need to take food? (yes / no)\n')
-                    money = input('Do you need a lot of money? (Bus, food expenses) (yes / no)\n')
-                    
-                    plan = 'Here is plan for item fetching:\n\n'
-                    
-                    plan += 'Go wash your hands. After that, in following order, take things that need clean hands\n'
-                    if water == 'yes' or food == 'yes':
-                        plan += '(kitchen)\n'
-                    if water =='yes':
-                        plan += 'water\n'
-                    if food=='yes':
-                        plan += 'food\n'
-                    plan += '(dresser)\n'
-                    plan += 'mask\n\n'
 
-                    plan += 'For following items there is no need for clean hands. Follow order to reduce time for fetching\n'
-               
-                    plan += '(dresser)\n'
-                    plan += 'socks\n'
-                    plan += 'spare cloth\n'
-
-                    plan += '(desk)\n'
-                    plan += 'earbuds\n'
-                    plan += 'paper and pen\n'
-                    plan += 'phone\n'
-                    
-                    plan += '(backpack)\n'
-                    plan += 'documents\n'
-                    plan += 'sleepers\n'
-                    
-                    plan += '(entrance)\n'    
-                    if money =='yes':
-                        plan += 'A LOT OF '
-                    plan += 'money\n'
-                    plan += 'keys\n'
-
-                    print(plan)
-
-                    comment = '\noptions:\nreload\nmain menu\nexit\n'
-                    
-                if command == 'exit':
-                    exit()
-            else:	# if command is nonsense
-                comment = 'Wrong format. Try again\n'
-
-            command = input(comment)
-
-           
 
 
 # eye-easy first
