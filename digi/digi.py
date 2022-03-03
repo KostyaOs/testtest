@@ -1,6 +1,7 @@
 import pandas as pd
 import os
 import datetime
+from playsound import playsound
 
 
     
@@ -181,6 +182,47 @@ while command != 'exit':
                     selected_rows = selected_rows.reset_index(drop=True)
                     print('Here are most fit tasks:')
                     print(selected_rows)
+                    
+                    # start timer
+                        # print('Type 'cancel' to cancel timer')
+                    # We learn what time it is now, learn how many minutes we should add, then find what time to stop timer. Then we plug hours and minutes of that time into separate variables for time checking part of code 
+                    # now = time.now()
+                    # duration = input()
+                    # future = now + duration
+
+                    now = datetime.datetime.now()
+                    duration = max_break
+                    half_duration = datetime.timedelta(hours=0, minutes = duration // 2,seconds=0)
+                    duration = datetime.timedelta(hours=0, minutes = duration,seconds=0)
+                    future = now + duration
+                    half_future = now + half_duration
+
+                    alarmH = future.hour
+                    alarmM = future.minute
+                    alarmS = future.second
+                    
+                    halfH = half_future.hour
+                    halfM = half_future.minute
+                    halfS = half_future.second               
+                  
+                    print("half alarm at",halfH,halfM,halfS)
+                    print("full alarm at",alarmH,alarmM,alarmS)
+
+                    beyond_half_over = False
+                    while(1 == 1):
+                        
+                        over = (alarmH == datetime.datetime.now().hour and
+                                alarmM == datetime.datetime.now().minute and alarmS <= datetime.datetime.now().second)
+                        half_over = (halfH == datetime.datetime.now().hour and
+                                halfM == datetime.datetime.now().minute and halfS <= datetime.datetime.now().second)
+                        if over :
+                            print("Break is over")
+                            playsound('D:/storage/pycharmProjects/project1/digi/over.mp3')
+                            break
+                        if half_over and not beyond_half_over:
+                            print("Half of break is over")
+                            playsound('D:/storage/pycharmProjects/project1/digi/half_over.mp3')
+                            beyond_half_over = True
                 
                     comment = 'ready to get next command\n'
 
