@@ -217,11 +217,11 @@ while command != 'exit':
                                 halfM == datetime.datetime.now().minute and halfS <= datetime.datetime.now().second)
                         if over :
                             print("Break is over")
-                            playsound('D:/storage/pycharmProjects/project1/digi/over.mp3')
+                            playsound('D:/storage/pycharmProjects/project1/digi/beep-01a.mp3')
                             break
                         if half_over and not beyond_half_over:
                             print("Half of break is over")
-                            playsound('D:/storage/pycharmProjects/project1/digi/half_over.mp3')
+                            playsound('D:/storage/pycharmProjects/project1/digi/beep-01a.mp3')
                             beyond_half_over = True
                 
                     comment = 'ready to get next command\n'
