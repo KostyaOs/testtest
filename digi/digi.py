@@ -4,7 +4,42 @@ import datetime
 from playsound import playsound
 
 
+
+def timer():
+    now = datetime.datetime.now()
+    duration = max_break
+    half_duration = datetime.timedelta(hours=0, minutes = duration // 2,seconds=0)
+    duration = datetime.timedelta(hours=0, minutes = duration,seconds=0)
+    future = now + duration
+    half_future = now + half_duration
+
+    alarmH = future.hour
+    alarmM = future.minute
+    alarmS = future.second
     
+    halfH = half_future.hour
+    halfM = half_future.minute
+    halfS = half_future.second               
+  
+    print("half alarm at",halfH,halfM,halfS)
+    print("full alarm at",alarmH,alarmM,alarmS)
+
+    beyond_half_over = False
+    while(1 == 1):
+        
+        over = (alarmH == datetime.datetime.now().hour and
+                alarmM == datetime.datetime.now().minute and alarmS <= datetime.datetime.now().second)
+        half_over = (halfH == datetime.datetime.now().hour and
+                halfM == datetime.datetime.now().minute and halfS <= datetime.datetime.now().second)
+        if over :
+            print("Break is over")
+            playsound('D:/storage/pycharmProjects/project1/digi/beep-01a.mp3')
+            break
+        if half_over and not beyond_half_over:
+            print("Half of break is over")
+            playsound('D:/storage/pycharmProjects/project1/digi/beep-01a.mp3')
+            beyond_half_over = True
+
 # check if program ran today
 
 # Turn current day to string
@@ -190,39 +225,7 @@ while command != 'exit':
                     # duration = input()
                     # future = now + duration
 
-                    now = datetime.datetime.now()
-                    duration = max_break
-                    half_duration = datetime.timedelta(hours=0, minutes = duration // 2,seconds=0)
-                    duration = datetime.timedelta(hours=0, minutes = duration,seconds=0)
-                    future = now + duration
-                    half_future = now + half_duration
-
-                    alarmH = future.hour
-                    alarmM = future.minute
-                    alarmS = future.second
-                    
-                    halfH = half_future.hour
-                    halfM = half_future.minute
-                    halfS = half_future.second               
-                  
-                    print("half alarm at",halfH,halfM,halfS)
-                    print("full alarm at",alarmH,alarmM,alarmS)
-
-                    beyond_half_over = False
-                    while(1 == 1):
-                        
-                        over = (alarmH == datetime.datetime.now().hour and
-                                alarmM == datetime.datetime.now().minute and alarmS <= datetime.datetime.now().second)
-                        half_over = (halfH == datetime.datetime.now().hour and
-                                halfM == datetime.datetime.now().minute and halfS <= datetime.datetime.now().second)
-                        if over :
-                            print("Break is over")
-                            playsound('D:/storage/pycharmProjects/project1/digi/beep-01a.mp3')
-                            break
-                        if half_over and not beyond_half_over:
-                            print("Half of break is over")
-                            playsound('D:/storage/pycharmProjects/project1/digi/beep-01a.mp3')
-                            beyond_half_over = True
+                    #timer()
                 
                     comment = 'ready to get next command\n'
 
